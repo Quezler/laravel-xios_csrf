@@ -94,6 +94,13 @@
             </div>
         </section>
 
+        <!-- Scripts -->
+        <script>
+            window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+        </script>
+
         <script src="js/app.js"></script>
     </body>
 </html>
