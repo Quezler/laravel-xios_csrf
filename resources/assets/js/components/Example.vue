@@ -1,23 +1,33 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
-
-                    <div class="panel-body">
-                        I'm an example component!
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="links">
+        <a href="#">{{url}} http status code: <span v-html="code"></span></a>
     </div>
 </template>
 
 <script>
     export default {
+        data() {
+            return {
+                url: '/api/user',
+                code: '000'
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
+            this.getUser();
+        },
+        methods: {
+            getUser() {
+                let vm = this;
+                window.axios.get(this.url, {
+                    validateStatus: function (status) {
+                        return status < 500; // Reject only if the status code is greater than or equal to 500
+                    }
+                })
+                .then(function (response) {
+                    vm.code = response.status;
+                });
+            }
         }
     }
 </script>
