@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AttachUserToEverySession;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Laravel\Passport\Http\Middleware\CreateFreshApiToken;
 
 class Kernel extends HttpKernel
 {
@@ -36,6 +37,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             AttachUserToEverySession::class,
+            CreateFreshApiToken::class,
         ],
 
         'api' => [
